@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="{{ wait_time }}; url={{ product_url }}">
+    <title>Redirecting...</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">    
+    <!-- Ensure you have CSS for the flags if you're using your own images or a library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <style>
+        .flag {
+            cursor: pointer;
+            width: 50px; /* You can adjust the size */
+        }
+    </style>
+</head>
+<body>
+    <h2>You will be redirected in {{ wait_time }} seconds...</h2>
+    <p>Choose your preferred language:</p>
+    <div>
+        {% for lang, url in language_urls.items() %}
+        <a href="{{ url }}" class="flag-icon flag-icon-{{ lang }}" title="{{ lang }}" style="display:inline-block;"></a>
+        {% endfor %}    
+    </div>
+
+    <script>
+        setTimeout(function() {
+            window.location.href = "{{ product_url }}";
+        }, { wait_time } * 1000);
+    </script>
+</body>
+</html>
